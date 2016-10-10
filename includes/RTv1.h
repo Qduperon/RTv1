@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 16:08:43 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/07 20:04:36 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/10/10 20:10:36 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,30 +50,66 @@ typedef	struct		s_cam
 	t_pos			dir;
 }					t_cam;
 
+typedef	struct		s_cone
+{
+	double			alpha;
+	t_color			color;
+	t_pos			pos;
+	struct s_cone	*next;
+}					t_cone;
+
+typedef struct		s_cylind
+{
+	double			radius;
+	t_color			color;
+	t_pos			pos;
+	struct s_cylind	*next;
+}					t_cylind;
+
+typedef struct		s_plan
+{
+	double			dis;
+	t_color			color;
+	t_pos			pos;
+	struct s_plan	*next;
+}					t_plan;
+
+typedef struct		s_sphere
+{
+	double			radius;
+	t_color			color;
+	t_pos			pos;
+	struct s_sphere	*next;
+}					 t_sphere;
+
 typedef struct		s_spot
 {
 	t_color			color;
 	t_pos			pos;
-	struct	s_spot	*next;
+	struct s_spot	*next;
 }					t_spot;
 
-typedef struct		s_obj
+typedef struct		s_scene
 {
-	char			*type;
-	double			data;
-	t_color			color;
-	t_pos			pos;
-	struct s_obj	*next;
-}					 t_obj;
+	t_cam			*cam;
+	t_cone			*cone;
+	t_cylind		*cylind;
+	t_plan			*plan;
+	t_sphere		*sphere;
+	t_spot			*spot;
+}					t_scene;
 
 typedef struct		s_env
 {
-	t_cam			*cam;
-	t_img			*img;
 	void			*mlx;
 	void			*win;
+	t_img			img;
 }					t_env;
 
+/*
+** camera.c
+*/
+t_cam				*ft_get_camera(int fd);
 /*
 ** clear.c
 */
@@ -89,11 +125,26 @@ void				ft_free_error(t_env *env);
 /*
 ** init.c
 */
-t_cam				*ft_init_cam(void);
+t_cam				*ft_new_camera(t_pos pos, t_pos dir);
+t_scene				*ft_get_scene(void);
+void				ft_init_scene(char *scene);
 /*
 ** parser.c
 */
 void				ft_parser(char *av, t_env *env);
 void				ft_camera(char *line, t_env *env);
+void				ft_RTv1(char *scene);
+/*
+** tools_vect.c
+*/
+double				ft_magnitude(t_pos *v);
+t_pos				*ft_neg(t_pos *v);
+t_pos				*ft_norm(t_pos *v);
+/*
+** vect.c
+*/
+t_pos				*ft_new_vector(double x, double y, double z);
+t_pos				*ft_vector(int fd);
+void				ft_deleted_vect(t_pos *vect);
 
 #endif

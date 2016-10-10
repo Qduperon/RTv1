@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 16:11:01 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/07 20:12:51 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/10/10 19:17:06 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,8 @@ void	ft_camera(char *line, t_env *env)
 
 }*/
 
-void	ft_parser(char *av, t_env *env)
+void	ft_RTv1(char *scene)
 {
-	int		fd;
-	int		i;
-	int		ret;
-	char	*line;
-
-	ft_putendl("coucou");
-	if ((fd = open(av, O_RDONLY) < 0))
-		ft_exit("file cannot be read");
-	ft_putendl("BLOUBLOU");
-	while ((ret = get_next_line(fd, &line)) > 0)
-	{
-		ft_camera(line, env);
-		//ft_check(line, &env);
-	}
-	if (ret == -1)
-		exit(-1);
+	ft_init_scene(scene);
+	ft_display();
 }

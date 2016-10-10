@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 16:08:08 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/07 19:50:20 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/10/10 15:50:03 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ int		main(int ac, char **av)
 	t_env	env;
 	t_img	img;
 
-	if (ac != 2)
+	if (ac == 2)
+		ft_RTv1(av[1]);
+	else
 		ft_error();
 	//if (!(env.mlx = mlx_init()))
 	//	return (-1);

@@ -6,7 +6,7 @@
 #    By: qduperon <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/06/16 13:22:36 by qduperon          #+#    #+#              #
-#    Updated: 2016/10/07 19:32:42 by qduperon         ###   ########.fr        #
+#    Updated: 2016/10/10 20:11:51 by qduperon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,11 +20,14 @@ NAME = RTv1
 #                           //  SOURCES  \\                                    #
 #==============================================================================#
 
-SRCS = srcs/clear.c \
+SRCS = srcs/camera.c \
+	   srcs/clear.c \
 	   srcs/error.c \
 	   srcs/init.c \
 	   srcs/main.c \
-	   srcs/parser.c\
+	   srcs/parser.c \
+	   srcs/tools_vect.c \
+	   srcs/vect.c \
 
 #==============================================================================#
 #                             // OBJECTS \\                                    #
