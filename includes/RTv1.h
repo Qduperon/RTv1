@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 16:08:43 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/10 20:10:36 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/10/11 18:24:53 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,46 +46,46 @@ typedef struct		s_img
 
 typedef	struct		s_cam
 {
-	t_pos			pos;
-	t_pos			dir;
+	t_pos			*pos;
+	t_pos			*dir;
 }					t_cam;
 
 typedef	struct		s_cone
 {
 	double			alpha;
-	t_color			color;
-	t_pos			pos;
+	t_color			*color;
+	t_pos			*pos;
 	struct s_cone	*next;
 }					t_cone;
 
 typedef struct		s_cylind
 {
 	double			radius;
-	t_color			color;
-	t_pos			pos;
+	t_color			*color;
+	t_pos			*pos;
 	struct s_cylind	*next;
 }					t_cylind;
 
 typedef struct		s_plan
 {
 	double			dis;
-	t_color			color;
-	t_pos			pos;
+	t_color			*color;
+	t_pos			*pos;
 	struct s_plan	*next;
 }					t_plan;
 
 typedef struct		s_sphere
 {
 	double			radius;
-	t_color			color;
-	t_pos			pos;
+	t_color			*color;
+	t_pos			*pos;
 	struct s_sphere	*next;
 }					 t_sphere;
 
 typedef struct		s_spot
 {
-	t_color			color;
-	t_pos			pos;
+	t_color			*color;
+	t_pos			*pos;
 	struct s_spot	*next;
 }					t_spot;
 
@@ -116,6 +116,26 @@ t_cam				*ft_get_camera(int fd);
 void				ft_clear_obj(t_obj **begin_list);
 void				ft_clear_spot(t_spot **begin_list);
 /*
+** color.c
+*/
+t_color				*ft_color(int fd);
+t_color				*ft_new_color(double r, double g, double b);
+void				ft_deleted_color(t_color *color);
+/*
+** cone.c
+*/
+t_cone				*ft_get_cone(int fd);
+t_cone				*ft_get_cones(int fd);
+t_cone				*ft_new_cone(double alpha, t_color *color, t_pos *pos);
+void				ft_add_cone(t_cone *start, t_cone *new);
+/*
+** cylindre.c
+*/
+t_cylind			*ft_get_cylind(int fd);
+t_cylind			*ft_get_cylind(int fd);
+t_cylind			*ft_new_cylind(double radius, t_color *color, t_pos *pos);
+void				ft_add_cylind(t_cylind *start, t_cylind *new);
+/*
 ** error.c
 */
 void				ft_error(void);
@@ -134,6 +154,27 @@ void				ft_init_scene(char *scene);
 void				ft_parser(char *av, t_env *env);
 void				ft_camera(char *line, t_env *env);
 void				ft_RTv1(char *scene);
+/*
+** plan.c
+*/
+t_plan				*ft_get_plan(int fd);
+t_plan				*ft_get_plans(int fd);
+t_plan				*ft_new_plan(double dis, t_color *color, t_pos *pos);
+void				ft_add_plan(t_plan *start, t_plan *new);
+/*
+** sphere.c
+*/
+t_sphere			*ft_get_sphere(int fd);
+t_sphere			*ft_get_spheres(int fd);
+t_sphere			*ft_new_sphere(double radius, t_color *color, t_pos *pos);
+void				ft_add_sphere(t_sphere *start, t_sphere *new);
+/*
+** spot.c
+*/
+t_spot				*ft_get_spot(int fd);
+t_spot				*ft_get_spots(int fd);
+t_spot				*ft_new_spot(t_color *color, t_pos *pos);
+void				ft_add_spot(t_spot *start, t_spot *new);
 /*
 ** tools_vect.c
 */

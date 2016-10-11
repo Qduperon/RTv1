@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 18:52:03 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/10 19:17:09 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/10/11 15:31:41 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,15 @@ void		ft_init_scene(char *scene)
 		if (!ft_strcmp("camera:", line))
 			s->cam = ft_get_camera(fd);	
 		if (!ft_strcmp("cone:", line))
-			s->cone = ft_get_cone(fd);
+			s->cone = ft_get_cones(fd);
 		if (!ft_strcmp("cylindre:", line))
-			s->cylind = ft_get_cylind(fd);
+			s->cylind = ft_get_cylinds(fd);
 		if (!ft_strcmp("plan:", line))
-			s->plan = ft_get_plan(fd);
+			s->plan = ft_get_plans(fd);
 		if (!ft_strcmp("sphere:", line))
-			s->sphere = ft_get_sphere(fd);
+			s->sphere = ft_get_spheres(fd);
 		if (!ft_strcmp("spot:", line))
-			s_>spot = ft_get_spot(fd);
+			s_>spot = ft_get_spots(fd);
 	}
 	if (ret == -1)
 		exit (-1);

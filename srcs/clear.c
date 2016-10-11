@@ -6,44 +6,80 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 16:58:32 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/07 18:06:56 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/10/11 18:28:54 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/RTv1.h"
 
-void		ft_clear_obj(t_obj **begin_list)
+void		ft_clear_cone(t_cone **start)
 {
-	t_obj	*tmp;
-	t_obj	*list;
+	t_cone	*tmp;
 
-	list = *begin_list;
-	tmp = NULL;
-	while (list)
+	while (*start != NULL)
 	{
-		if (list->next)
-			tmp = list->next;
-		else
-			tmp = NULL;
-		free(list);
-		list = tmp;
+		tmp = (*start)->next;
+		ft_deleted_vect((*start)->pos);
+		ft_deleted_color((*start)->color);
+		(*start)->next = NULL;
+		free(*start);
+		*start = tmp;
+	}
+}
+void		ft_deleted_cylindre(t_cylind **start)
+{
+	t_cylind	*tmp;
+
+	while (*start != NULL)
+	{
+		tmp = (*start)->next;
+		ft_deleted_vect((*start)->pos);
+		ft_deleted_color((*start)->color);
+		(*start)->next = NULL;
+		free(*start);
+		*start = tmp;
 	}
 }
 
-void		ft_clear_spot(t_spot **begin_list)
+void		ft_deleted_plan(t_cone **start)
+{
+	t_plan	*tmp;
+
+	while (*start != NULL)
+	{
+		tmp = (*start)->next;
+		delete_vect((*start)->pos);
+		delete_color((*start)->color);
+		(*start)->next = NULL;
+		free(*start);
+		*start = tmp;
+	}
+}
+void		ft_deleted_sphere(t_sphere **start)
+{
+	t_sphere	*tmp;
+
+	while (*start != NULL)
+	{
+		tmp = (*start)->next;
+		delete_vect((*start)->pos);
+		delete_color((*start)->color);
+		(*start)->next = NULL;
+		free(*start);
+		*start = tmp;
+	}
+}
+void		ft_deleted_spot(t_spot **start)
 {
 	t_spot	*tmp;
-	t_spot	*list;
 
-	list = *begin_list;
-	tmp = NULL;
-	while (list)
+	while (*start != NULL)
 	{
-		if (list->next)
-			tmp = list->next;
-		else
-			tmp = NULL;
-		free(list);
-		list = tmp;
+		tmp = (*start)->next;
+		delete_vect((*start)->pos);
+		delete_color((*start)->color);
+		(*start)->next = NULL;
+		free(*start);
+		*start = tmp;
 	}
 }
