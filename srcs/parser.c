@@ -6,39 +6,14 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 16:11:01 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/10 19:17:06 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/10/14 15:30:58 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/RTv1.h"
 
-void	ft_camera(char *line, t_env *env)
-{
-	if (ft_strstr(line, "pos") == 0)
-	{
-		env->cam->pos.x = line[6];
-		env->cam->pos.y = line[9];
-		env->cam->pos.z = line[12];
-	}
-	if (ft_strstr(line, "dir") == 0)
-	{
-		env->cam->dir.x = line[6];
-		env->cam->dir.y = line[9];
-		env->cam->dir.z = line[12];
-	}
-}
-/*
-	while (line[i] == '-')
-		i++;
-	if (i == 7 && !line[i])
-		return ;
-	else
-		ft_free_error(env);
-
-}*/
-
 void	ft_RTv1(char *scene)
 {
 	ft_init_scene(scene);
-	ft_display();
+	//ft_display();
 }

@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 16:58:32 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/11 18:28:54 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/10/14 15:23:15 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,15 @@ void		ft_deleted_cylindre(t_cylind **start)
 	}
 }
 
-void		ft_deleted_plan(t_cone **start)
+void		ft_deleted_plan(t_plan **start)
 {
 	t_plan	*tmp;
 
 	while (*start != NULL)
 	{
 		tmp = (*start)->next;
-		delete_vect((*start)->pos);
-		delete_color((*start)->color);
+		ft_deleted_vect((*start)->pos);
+		ft_deleted_color((*start)->color);
 		(*start)->next = NULL;
 		free(*start);
 		*start = tmp;
@@ -62,8 +62,8 @@ void		ft_deleted_sphere(t_sphere **start)
 	while (*start != NULL)
 	{
 		tmp = (*start)->next;
-		delete_vect((*start)->pos);
-		delete_color((*start)->color);
+		ft_deleted_vect((*start)->pos);
+		ft_deleted_color((*start)->color);
 		(*start)->next = NULL;
 		free(*start);
 		*start = tmp;
@@ -76,8 +76,8 @@ void		ft_deleted_spot(t_spot **start)
 	while (*start != NULL)
 	{
 		tmp = (*start)->next;
-		delete_vect((*start)->pos);
-		delete_color((*start)->color);
+		ft_deleted_vect((*start)->pos);
+		ft_deleted_color((*start)->color);
 		(*start)->next = NULL;
 		free(*start);
 		*start = tmp;

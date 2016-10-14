@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 18:00:12 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/11 18:13:41 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/10/14 15:29:40 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_spot			*ft_new_spot(t_color *color, t_pos *pos)
 	return (s);
 }
 
-void			ft_add_spot(t_spot *start, t_spot new)
+void			ft_add_spot(t_spot *start, t_spot *new)
 {
 	while (start->next)
 		start = start->next;

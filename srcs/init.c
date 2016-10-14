@@ -6,13 +6,13 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 18:52:03 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/11 15:31:41 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/10/14 15:32:07 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/RTv1.h"
 
-t_cam		*ft_new_camera(t_pos pos, t_pos dir)
+t_cam		*ft_new_camera(t_pos *pos, t_pos *dir)
 {
 	t_cam	*c;
 
@@ -49,23 +49,22 @@ void		ft_init_scene(char *scene)
 	int		ret;
 	t_scene	*s;
 
-	if ((fd = open(scene, O_RDONLY) == -1))
-		exit(-1);
+	fd = open(scene, O_RDONLY);
 	s = ft_get_scene();
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
-		if (!ft_strcmp("camera:", line))
+		if (ft_strstr(line, "camera:"))
 			s->cam = ft_get_camera(fd);	
-		if (!ft_strcmp("cone:", line))
+		if (ft_strstr(line, "cone:"))
 			s->cone = ft_get_cones(fd);
-		if (!ft_strcmp("cylindre:", line))
+		if (ft_strstr(line, "cylindre:"))
 			s->cylind = ft_get_cylinds(fd);
-		if (!ft_strcmp("plan:", line))
+		if (ft_strstr(line, "plan:"))
 			s->plan = ft_get_plans(fd);
-		if (!ft_strcmp("sphere:", line))
+		if (ft_strstr(line, "sphere:"))
 			s->sphere = ft_get_spheres(fd);
-		if (!ft_strcmp("spot:", line))
-			s_>spot = ft_get_spots(fd);
+		if (ft_strstr(line, "spot:"))
+			s->spot = ft_get_spots(fd);
 	}
 	if (ret == -1)
 		exit (-1);

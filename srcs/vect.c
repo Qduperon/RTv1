@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/10 19:27:25 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/10 19:57:48 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/10/14 15:30:33 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,5 @@ t_pos		*ft_vector(int fd)
 }
 void		ft_deleted_vect(t_pos *vect)
 {
-	free(v);
+	free(vect);
 }

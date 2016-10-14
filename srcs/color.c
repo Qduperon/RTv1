@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 15:31:49 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/11 18:22:21 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/10/14 15:22:12 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_color		*ft_color(int fd)
 	return (ft_new_color(r, g, b));
 }
 
-void		ft_deleted_color(t_color *color);
+void		ft_deleted_color(t_color *color)
 {
 	free(color);
 }

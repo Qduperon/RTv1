@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 17:41:09 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/07 19:33:04 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/10/14 15:24:57 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,5 @@ void		ft_error(void)
 void		ft_exit(char *s)
 {
 	ft_putendl(s);
-	exit(0);
-}
-
-void		ft_free_error(t_env *env)
-{
-	free(env->cam);
-	//ft_clear_obj(&env->obj);
-	//ft_clear_spot(&env->spot);
-	ft_putendl("Map Error");
-	exit(0);
-}
-
-void		ft_free(t_env *env)
-{
-	free(env->cam);
-	//ft_clear_obj(&env->obj);
-	//ft_clear_spot(&env->spot);
 	exit(0);
 }

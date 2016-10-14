@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 16:08:43 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/11 18:24:53 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/10/14 15:30:15 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <fcntl.h>
 # include <stdlib.h>
+# include <math.h>
 # include "../libft/includes/libft.h"
 # include "../minilibx_macos/mlx.h"
 
@@ -113,8 +114,11 @@ t_cam				*ft_get_camera(int fd);
 /*
 ** clear.c
 */
-void				ft_clear_obj(t_obj **begin_list);
-void				ft_clear_spot(t_spot **begin_list);
+void				ft_deleted_cone(t_cone **start);
+void				ft_deleted_cylindre(t_cylind **start);
+void				ft_deleted_plan(t_plan **start);
+void				ft_deleted_sphere(t_sphere **start);
+void				ft_deleted_spot(t_spot **start);
 /*
 ** color.c
 */
@@ -132,7 +136,7 @@ void				ft_add_cone(t_cone *start, t_cone *new);
 ** cylindre.c
 */
 t_cylind			*ft_get_cylind(int fd);
-t_cylind			*ft_get_cylind(int fd);
+t_cylind			*ft_get_cylinds(int fd);
 t_cylind			*ft_new_cylind(double radius, t_color *color, t_pos *pos);
 void				ft_add_cylind(t_cylind *start, t_cylind *new);
 /*
@@ -145,14 +149,12 @@ void				ft_free_error(t_env *env);
 /*
 ** init.c
 */
-t_cam				*ft_new_camera(t_pos pos, t_pos dir);
+t_cam				*ft_new_camera(t_pos *pos, t_pos *dir);
 t_scene				*ft_get_scene(void);
 void				ft_init_scene(char *scene);
 /*
 ** parser.c
 */
-void				ft_parser(char *av, t_env *env);
-void				ft_camera(char *line, t_env *env);
 void				ft_RTv1(char *scene);
 /*
 ** plan.c

@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 16:58:10 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/11 17:43:54 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/10/14 15:29:18 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_plan			*ft_new_plan(double dis, t_color *color, t_pos *pos)
 	p->dis = dis;
 	p->color = color;
 	p->pos = pos;
-	return (c);
+	return (p);
 }
 
 void			ft_add_plan(t_plan *start, t_plan *new)
@@ -68,7 +68,7 @@ t_plan			*ft_get_plans(int fd)
 		if (!ft_strcmp("new:", line))
 		{
 			if (p == NULL)
-				c = ft_get_plan(fd);
+				p = ft_get_plan(fd);
 			else
 				ft_add_plan(p, ft_get_plan(fd));
 		}
