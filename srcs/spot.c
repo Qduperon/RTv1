@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 18:00:12 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/14 15:29:40 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/10/14 16:10:08 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ t_spot			*ft_get_spot(int fd)
 
 	while ((ret = get_next_line(fd, &line)) > 0 && ft_strcmp(line, "-------"))
 	{
-		if (!ft_strcmp("pos:", line))
+		if (ft_strstr(line, "pos:"))
 			pos = ft_vector(fd);
-		if (!ft_strcmp("color:", line))
+		if (ft_strstr(line, "color:"))
 			color = ft_color(fd);
 	}
 	if (ret == -1)
@@ -58,7 +58,7 @@ t_spot			*ft_get_spots(int fd)
 	s = NULL;
 	while ((ret = get_next_line(fd, &line)) > 0 && ft_strcmp("-------", line))
 	{
-		if (!ft_strcmp("new:", line))
+		if (ft_strstr(line, "new:"))
 		{
 			if (s == NULL)
 				s = ft_get_spot(fd);

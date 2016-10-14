@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 14:39:39 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/11 16:06:49 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/10/14 16:03:23 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ t_cone			*ft_get_cone(int fd)
 
 	while ((ret = get_next_line(fd, &line)) > 0 && ft_strcmp(line, "--------"))
 	{
-		if (!ft_strcmp("pos:", line))
+		if (ft_strstr(line, "pos:"))
 			pos = ft_vector(fd);
-		if (!ft_strcmp("alpha:", line))
+		if (ft_strstr(line, "alpha:"))
 		{
 			ret = get_next_line(fd, &line);
 			alpha = ft_atodouble(&line);
 		}
-		if (!ft_strcmp("color:", line))
+		if (ft_strstr(line, "color:"))
 			color = ft_color(fd);
 	}
 	if (ret == -1)
@@ -65,7 +65,7 @@ t_cone			*ft_get_cones(int fd)
 	c = NULL;
 	while ((ret = get_next_line(fd, &line)) > 0 && ft_strcmp("-------", line))
 	{
-		if (!ft_strcmp("new:", line))
+		if (ft_strstr(line, "new:"))
 		{
 			if (c == NULL)
 				c = ft_get_cone(fd);

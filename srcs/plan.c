@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 16:58:10 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/14 15:29:18 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/10/14 16:07:25 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ t_plan			*ft_get_plan(int fd)
 
 	while ((ret = get_next_line(fd, &line)) > 0 && ft_strcmp(line, "-------"))
 	{
-		if (!ft_strcmp("pos:", line))
+		if (ft_strstr(line, "pos:"))
 			pos = ft_vector(fd);
-		if (!ft_strcmp("dis:", line))
+		if (ft_strstr(line, "dis:"))
 		{
 			ret = get_next_line(fd, &line);
 			dis = ft_atodouble(&line);
 		}
-		if (!ft_strcmp("color:", line))
+		if (ft_strstr(line, "color:"))
 			color = ft_color(fd);
 	}
 	if (ret == -1)
@@ -65,7 +65,7 @@ t_plan			*ft_get_plans(int fd)
 	p = NULL;
 	while ((ret = get_next_line(fd, &line)) > 0 && ft_strcmp("-------", line))
 	{
-		if (!ft_strcmp("new:", line))
+		if (ft_strstr(line, "new:"))
 		{
 			if (p == NULL)
 				p = ft_get_plan(fd);

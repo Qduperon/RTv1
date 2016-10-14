@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 18:52:03 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/14 15:32:07 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/10/14 16:23:13 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void		ft_init_scene(char *scene)
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
 		if (ft_strstr(line, "camera:"))
-			s->cam = ft_get_camera(fd);	
+			s->cam = ft_get_camera(fd);
 		if (ft_strstr(line, "cone:"))
 			s->cone = ft_get_cones(fd);
 		if (ft_strstr(line, "cylindre:"))
