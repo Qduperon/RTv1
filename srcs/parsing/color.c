@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/25 11:40:30 by qduperon          #+#    #+#             */
-/*   Updated: 2016/11/16 20:03:51 by qduperon         ###   ########.fr       */
+/*   Created: 2016/12/23 15:03:38 by qduperon          #+#    #+#             */
+/*   Updated: 2016/12/23 15:03:41 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/rtv1.h"
 
-char	*ft_strcpy(char *dest, const char *src)
+t_color		ft_new_color(double r, double g, double b)
 {
-	int i;
+	t_color	c;
 
-	i = 0;
-	while (src[i])
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
+	c.r = r;
+	c.g = g;
+	c.b = b;
+	return (c);
+}
+
+t_color		ft_color(char *line)
+{
+	double	r;
+	double	g;
+	double	b;
+
+	r = ft_atodouble(&line);
+	g = ft_atodouble(&line);
+	b = ft_atodouble(&line);
+	return (ft_new_color(r, g, b));
 }

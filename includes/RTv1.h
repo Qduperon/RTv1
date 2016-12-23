@@ -1,193 +1,194 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   RTv1.h                                             :+:      :+:    :+:   */
+/*   rtv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/05 16:08:43 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/14 15:30:15 by qduperon         ###   ########.fr       */
+/*   Created: 2016/12/23 15:00:31 by qduperon          #+#    #+#             */
+/*   Updated: 2016/12/23 15:00:33 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RTV1_H
 # define RTV1_H
 
-# include <fcntl.h>
-# include <stdlib.h>
 # include <math.h>
-# include "../libft/includes/libft.h"
 # include "../minilibx_macos/mlx.h"
+# include "../libft/includes/libft.h"
+# include "defines.h"
+# include <fcntl.h>
 
-# define HEIGHT	750
-# define WIDTH	750
-
-typedef	struct		s_pos
+typedef struct		s_vec
 {
 	double			x;
 	double			y;
 	double			z;
-}					t_pos;
+}					t_vec;
 
-typedef	struct		s_color
+typedef struct		s_color
 {
-	double			red;
-	double			green;
-	double			blue;	
+	double			r;
+	double			g;
+	double			b;
 }					t_color;
 
-typedef struct		s_img
+typedef	struct		s_img
 {
 	char			*data;
 	int				bpp;
 	int				endian;
-	int				sl;
-	void			*img;	
+	int				s_line;
+	void			*img;
 }					t_img;
 
-typedef	struct		s_cam
+typedef struct		s_obj
 {
-	t_pos			*pos;
-	t_pos			*dir;
-}					t_cam;
+	int				type;
+	double			size;
+	t_color			col;
+	t_vec			pos;
+	t_vec			rot;
+	struct s_obj	*next;
+}					t_obj;
 
-typedef	struct		s_cone
+typedef	struct		s_calc
 {
-	double			alpha;
-	t_color			*color;
-	t_pos			*pos;
-	struct s_cone	*next;
-}					t_cone;
-
-typedef struct		s_cylind
-{
-	double			radius;
-	t_color			*color;
-	t_pos			*pos;
-	struct s_cylind	*next;
-}					t_cylind;
-
-typedef struct		s_plan
-{
-	double			dis;
-	t_color			*color;
-	t_pos			*pos;
-	struct s_plan	*next;
-}					t_plan;
-
-typedef struct		s_sphere
-{
-	double			radius;
-	t_color			*color;
-	t_pos			*pos;
-	struct s_sphere	*next;
-}					 t_sphere;
+	t_vec			v1;
+	t_vec			v2;
+	t_vec			v3;
+}					t_calc;
 
 typedef struct		s_spot
 {
-	t_color			*color;
-	t_pos			*pos;
+	t_color			col;
+	t_vec			pos;
+	double			size;
 	struct s_spot	*next;
 }					t_spot;
-
-typedef struct		s_scene
-{
-	t_cam			*cam;
-	t_cone			*cone;
-	t_cylind		*cylind;
-	t_plan			*plan;
-	t_sphere		*sphere;
-	t_spot			*spot;
-}					t_scene;
 
 typedef struct		s_env
 {
 	void			*mlx;
 	void			*win;
-	t_img			img;
+	double			d;
+	t_img			*img;
+	t_obj			*obj;
+	t_spot			*spots;
+	t_vec			cam_pos;
+	t_vec			cam_dir;
+	t_vec			ray_dir;
+	t_vec			ray_pos;
+	double			dist;
 }					t_env;
 
+int					draw(t_env *env);
+t_vec				normale(t_obj *obj, t_env *env, t_vec cam);
+void				trace(t_env *env, t_obj *node, int x, int y);
+int					ft_error(char *str, int ex);
+void				display(t_env *e);
+int					ft_keyhook(int keycode, t_env *env);
+int					ft_red_cross(int keycode, t_env *env);
+/*
+** vectors.c
+*/
+void				ft_deleted_vect(t_vec vect);
+t_vec				sub_vect(t_vec v1, t_vec v2);
+t_vec				scale_vect(t_vec v1, double fact);
+t_vec				add_vect(t_vec v1, t_vec v2);
+t_vec				norm_vect(t_vec v);
+double				dot_vect(t_vec v1, t_vec v2);
+t_vec				new_vec(double x, double y, double z);
+t_vec				ft_vector(char *line);
+t_vec				cross_vect(t_vec v1, t_vec v2);
 /*
 ** camera.c
 */
-t_cam				*ft_get_camera(int fd);
+void				ft_get_camera(char **line, t_env *env, int i);
 /*
 ** clear.c
 */
-void				ft_deleted_cone(t_cone **start);
-void				ft_deleted_cylindre(t_cylind **start);
-void				ft_deleted_plan(t_plan **start);
-void				ft_deleted_sphere(t_sphere **start);
-void				ft_deleted_spot(t_spot **start);
+void				ft_clear_obj(t_obj **start);
+void				ft_clear_spot(t_spot **start);
 /*
 ** color.c
 */
-t_color				*ft_color(int fd);
-t_color				*ft_new_color(double r, double g, double b);
-void				ft_deleted_color(t_color *color);
+t_color				ft_color(char *line);
+t_color				ft_new_color(double r, double g, double b);
+void				ft_deleted_color(t_color color);
 /*
 ** cone.c
 */
-t_cone				*ft_get_cone(int fd);
-t_cone				*ft_get_cones(int fd);
-t_cone				*ft_new_cone(double alpha, t_color *color, t_pos *pos);
-void				ft_add_cone(t_cone *start, t_cone *new);
+t_obj				*ft_get_cone(char **line, int i);
+t_obj				*ft_get_cones(char **line, t_env *env, int i);
 /*
 ** cylindre.c
 */
-t_cylind			*ft_get_cylind(int fd);
-t_cylind			*ft_get_cylinds(int fd);
-t_cylind			*ft_new_cylind(double radius, t_color *color, t_pos *pos);
-void				ft_add_cylind(t_cylind *start, t_cylind *new);
+t_obj				*ft_get_cylind(char **line, int i);
+t_obj				*ft_get_cylinds(char **line, t_env *env, int i);
 /*
-** error.c
+** display.c
 */
-void				ft_error(void);
-void				ft_exit(char *s);
-void				ft_free(t_env *env);
-void				ft_free_error(t_env *env);
+char				*type_obj(t_obj *obj);
+void				putcam(t_env *env);
+void				putlight(t_env *env);
+void				putobj(t_env *env);
+void				putobj2(t_obj *obj);
 /*
 ** init.c
 */
-t_cam				*ft_new_camera(t_pos *pos, t_pos *dir);
-t_scene				*ft_get_scene(void);
-void				ft_init_scene(char *scene);
+void				ft_add_obj(t_obj *start, t_obj *new);
+void				ft_add_spot(t_spot *start, t_spot *new);
+void				ft_init_scene(char *scene, t_env *env);
 /*
-** parser.c
+** new.c
 */
-void				ft_RTv1(char *scene);
+t_obj				*ft_new_obj(double size, t_vec pos, t_vec rot, t_color c);
+t_obj				*ft_new_obj2(double size, t_vec pos, t_vec rot, t_color c);
+t_obj				*ft_new_obj3(double size, t_vec pos, t_vec rot, t_color c);
+t_obj				*ft_new_obj4(double size, t_vec pos, t_vec rot, t_color c);
+t_spot				*ft_new_spot(double size, t_vec pos, t_color c);
+/*
+** objects.c
+*/
+t_obj				*ft_intersection(t_env *e, t_obj *node);
+double				ft_plan(t_obj *obj, t_env *e);
+double				ft_sphere(t_obj *obj, t_env *e);
+double				ft_cylindre(t_obj *obj, t_env *e);
+double				ft_cone(t_obj *obj, t_env *e);
 /*
 ** plan.c
 */
-t_plan				*ft_get_plan(int fd);
-t_plan				*ft_get_plans(int fd);
-t_plan				*ft_new_plan(double dis, t_color *color, t_pos *pos);
-void				ft_add_plan(t_plan *start, t_plan *new);
+t_obj				*ft_get_plan(char **line, int i);
+t_obj				*ft_get_plans(char **line, t_env *env, int i);
 /*
 ** sphere.c
 */
-t_sphere			*ft_get_sphere(int fd);
-t_sphere			*ft_get_spheres(int fd);
-t_sphere			*ft_new_sphere(double radius, t_color *color, t_pos *pos);
-void				ft_add_sphere(t_sphere *start, t_sphere *new);
+t_obj				*ft_get_sphere(char **line, int i);
+t_obj				*ft_get_spheres(char **line, t_env *env, int i);
 /*
-** spot.c
+** spots.c
 */
-t_spot				*ft_get_spot(int fd);
-t_spot				*ft_get_spots(int fd);
-t_spot				*ft_new_spot(t_color *color, t_pos *pos);
-void				ft_add_spot(t_spot *start, t_spot *new);
+t_spot				*ft_get_spot(char **line, int i);
+t_spot				*ft_get_spots(char **line, t_env *env, int i);
 /*
-** tools_vect.c
+** tools.c
 */
-double				ft_magnitude(t_pos *v);
-t_pos				*ft_neg(t_pos *v);
-t_pos				*ft_norm(t_pos *v);
+char				**ft_files(char *scene, char **file);
+double				ft_data(char *line);
+int					ft_countline(char *scene);
+void				ft_free_tab(char **tab, int i);
 /*
-** vect.c
+** tools.c
 */
-t_pos				*ft_new_vector(double x, double y, double z);
-t_pos				*ft_vector(int fd);
-void				ft_deleted_vect(t_pos *vect);
-
+t_obj				*inter_loop(t_obj *node, t_env *e, t_obj *tmp, t_obj lum);
+void				putdisplay(t_env *env);
+double				deg_to_rad(double deg);
+t_vec				inv(t_vec norm, t_env *env, t_obj *obj);
+t_obj				*fonct_plan(t_obj *obj);
+/*
+** light.c
+*/
+double				min_max(double numb, double min, double max);
+double				calc_lamb(t_env *env, t_obj *obj);
 #endif

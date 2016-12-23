@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_putdouble.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/25 11:40:30 by qduperon          #+#    #+#             */
-/*   Updated: 2016/11/16 20:03:51 by qduperon         ###   ########.fr       */
+/*   Created: 2016/11/02 15:32:25 by qduperon          #+#    #+#             */
+/*   Updated: 2016/11/02 15:35:05 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strcpy(char *dest, const char *src)
+void	ft_putdouble(double nb, int precision)
 {
-	int i;
+	int		expo;
+	int		cpt;
 
-	i = 0;
-	while (src[i])
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
+	expo = 1;
+	cpt = 0;
+	while (cpt++ < precision)
+		expo *= 10;
+	ft_putnbr((int)nb);
+	ft_putchar('.');
+	if (precision)
+		ft_putnbr((int)(nb * expo) % expo);
 }

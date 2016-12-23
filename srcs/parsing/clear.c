@@ -1,27 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/25 11:40:30 by qduperon          #+#    #+#             */
-/*   Updated: 2016/11/16 20:03:51 by qduperon         ###   ########.fr       */
+/*   Created: 2016/12/23 15:04:30 by qduperon          #+#    #+#             */
+/*   Updated: 2016/12/23 15:04:31 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/rtv1.h"
 
-char	*ft_strcpy(char *dest, const char *src)
+void		ft_clear_obj(t_obj **start)
 {
-	int i;
+	t_obj	*tmp;
 
-	i = 0;
-	while (src[i])
+	while (*start != NULL)
 	{
-		dest[i] = src[i];
-		i++;
+		tmp = (*start)->next;
+		(*start)->next = NULL;
+		free(*start);
+		*start = tmp;
 	}
-	dest[i] = '\0';
-	return (dest);
+}
+
+void		ft_clear_spot(t_spot **start)
+{
+	t_spot	*tmp;
+
+	while (*start != NULL)
+	{
+		tmp = (*start)->next;
+		(*start)->next = NULL;
+		free(*start);
+		*start = tmp;
+	}
 }

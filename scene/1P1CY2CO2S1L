@@ -1,0 +1,76 @@
+camera:
+new:
+pos:
+0, 50, -350
+dir:
+0, 1, 0
+-------
+-------
+spot:
+new:
+pos:
+0, 150, 0
+color:
+255, 255, 255
+size:
+1
+-------
+-------
+sphere:
+new:
+pos:
+40, 20, 20
+radius:
+5
+color:
+100, 140, 255
+-------
+-------
+plan:
+new:
+pos:
+200, 42, 0
+dis:
+10
+color:
+255, 255, 255
+rot:
+0, -1, 0
+-------
+-------
+cylindre:
+new:
+pos:
+100, -40, 40
+radius:
+20
+color:
+0, 255, 0
+rot:
+1, 2, 1
+-------
+-------
+cylindre:
+new:
+pos:
+125, 40, 50
+radius:
+10
+color:
+255, 255, 0
+rot:
+1, 1, 1
+-------
+-------
+cone:
+new:
+pos:
+40, 20, 0
+alpha:
+45
+color:
+150, 250, 120
+rot:
+1, 0, 0
+-------
+END

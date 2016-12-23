@@ -5,77 +5,48 @@
 #                                                     +:+ +:+         +:+      #
 #    By: qduperon <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2016/06/16 13:22:36 by qduperon          #+#    #+#              #
-#    Updated: 2016/10/11 18:23:27 by qduperon         ###   ########.fr        #
+#    Created: 2016/12/23 15:00:02 by qduperon          #+#    #+#              #
+#    Updated: 2016/12/23 15:00:08 by qduperon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-#==============================================================================#
-#                               // NAME \\                                     #
-#==============================================================================#
+NAME = rtv1
 
-NAME = RTv1
+CFLAGS = -Wall -Werror -Wextra -I include -g3
 
-#==============================================================================#
-#                           //  SOURCES  \\                                    #
-#==============================================================================#
+SRC = srcs/parsing/camera.c srcs/parsing/clear.c srcs/parsing/color.c \
+	  srcs/parsing/cone.c srcs/parsing/cylindre.c srcs/parsing/init.c\
+	  srcs/parsing/plan.c srcs/parsing/sphere.c srcs/parsing/parsing_tools.c\
+	  srcs/parsing/spot.c srcs/parsing/new.c srcs/display.c srcs/tools.c\
+	  srcs/draw.c srcs/hook.c srcs/main.c srcs/objects.c srcs/vectors.c\
+	srcs/vectors2.c srcs/norm.c srcs/light.c
 
-SRCS = srcs/camera.c \
-	   srcs/clear.c \
-	   srcs/color.c \
-	   srcs/cone.c \
-	   srcs/cylindre.c \
-	   srcs/error.c \
-	   srcs/init.c \
-	   srcs/main.c \
-	   srcs/parser.c \
-	   srcs/plan.c \
-	   srcs/sphere.c \
-	   srcs/spot.c \
-	   srcs/tools_vect.c \
-	   srcs/vect.c \
+OBJ = $(SRC:.c=.o)
 
-#==============================================================================#
-#                             // OBJECTS \\                                    #
-#==============================================================================#
+all : $(NAME)
 
-OBJ = $(SRCS:.c=.o)
+$(NAME) : $(OBJ)
+	@make -C libft
+	@make -C minilibx_macos
+	@gcc $(CFLAGS) -o $(NAME) $(OBJ) -L minilibx_macos -lmlx \
+	-framework OpenGl -framework Appkit libft/libft.a minilibx_macos/libmlx.a
+	@echo "Make libmlx.a: \033[1;32m DONE !\033[m"
+	@echo "Make $(NAME) : \033[1;32m DONE !\033[m"
 
-#==============================================================================#
-#                             //  FLAGS  \\                                    #
-#==============================================================================#
+clean :
+	@make -C libft clean
+	@make -C minilibx_macos clean
+	@rm -rf $(OBJ)
+	@echo "Clean Libft, Minilibx and $(NAME) : \033[1;32m DONE !\033[m"
 
-FLAGS = -Wall -Werror -Wextra
+fclean : clean
+	@rm -rf $(NAME)
+	@make -C libft fclean
+	@echo "Fclean $(NAME) : \033[1;32m DONE !\033[m"
 
-#==============================================================================#
-#                            // COMPILATION \\                                 #
-#==============================================================================#
+re : fclean all
 
-all: $(NAME)
+demo :
+	./Rtv1 scene/demo.1
 
-$(NAME): $(OBJ)
-	make -C libft
-	make -C minilibx_macos
-	gcc -o $(NAME) $(FLAGS) $(OBJ) -I./includes -lmlx -framework OpenGL -framework AppKit \
-		-lft -L./libft -I./minilibx_macos
-
-#==============================================================================#
-#                              // DELETING \\                                  #
-#==============================================================================#
-
-clean:
-	make clean -C libft
-	rm -f $(OBJ)
-
-fclean: clean
-	make clean -C minilibx_macos
-	make fclean -C libft
-	rm -f $(NAME)
-
-#==============================================================================#
-#                             // RETRY \\                                      #
-#==============================================================================#
-
-re: fclean all
-
-.PHONY : all clean fclean re
+.PHONY: all clean fclean re

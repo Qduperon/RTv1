@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/25 11:40:30 by qduperon          #+#    #+#             */
-/*   Updated: 2016/11/16 20:03:51 by qduperon         ###   ########.fr       */
+/*   Created: 2016/12/23 15:03:26 by qduperon          #+#    #+#             */
+/*   Updated: 2016/12/23 15:03:28 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/rtv1.h"
 
-char	*ft_strcpy(char *dest, const char *src)
+void		ft_get_camera(char **line, t_env *env, int i)
 {
-	int i;
-
-	i = 0;
-	while (src[i])
+	while (!ft_strstr(line[i], "-------"))
 	{
-		dest[i] = src[i];
+		if (ft_strstr(line[i], "pos:"))
+			env->cam_pos = ft_vector(line[i + 1]);
+		if (ft_strstr(line[i], "dir:"))
+			env->cam_dir = ft_vector(line[i + 1]);
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
 }
