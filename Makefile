@@ -6,7 +6,7 @@
 #    By: qduperon <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/23 15:00:02 by qduperon          #+#    #+#              #
-#    Updated: 2016/12/23 15:00:08 by qduperon         ###   ########.fr        #
+#    Updated: 2016/12/29 15:35:35 by qduperon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ fclean : clean
 re : fclean all
 
 demo :
-	./Rtv1 scene/demo.1
+	@make re
+	./Rtv1 scene/testroom
 
 .PHONY: all clean fclean re
